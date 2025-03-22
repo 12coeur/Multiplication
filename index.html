@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplications</title>
+    <link rel="stylesheet" href="standardisation.css">
+</head>
+<body>
+    <audio id="cliclac" src="media/sons/snapshot.mp3"></audio>
+    <audio id="rate" src="media/sons/rate.mp3"></audio>
+    <audio id="pioupiou" src="media/sons/pioupiou.mp3"></audio>  
+    <audio id="ding" src="media/sons/ding.mp3"></audio>  
+    <audio id="bravos" src="media/sons/bravos.mp3"></audio>  
+
+    <img src="media/images/grilletransparente.png" id="grilleOverlay" alt="Grille Overlay" style="display:none;">
+ 
+    <div id="container">
+        <img src="media/images/bille.png" id="bille" alt="Bille" draggable="false">
+        <img src="media/images/guide.png" id="guide" alt="guide" draggable="false">
+        <img src="media/images/signature.png" id="signature" alt="signature" draggable="false">
+        <img src="media/images/PlateauRoulette.png" id="plateau" alt="Plateau" draggable="false">
+        <!-- Ajout de l'encadré -->
+        <div id="randomBox">
+            <span id="randomText">3 X 5</span> <!-- Valeur par défaut -->
+            <!-- Bouton score -->
+            <button id="ButtonScore">Score : 0</button>
+            <!-- Bouton -->
+            <button id="go2Button">Règlement et reset</button>
+            <!-- Produit -->
+            <div id="product">99</div>
+            <!-- Valeur par défaut -->
+           <div id="angleguide">--</div>
+              <!-- Affichage -->
+            <div id="anglechoix">--</div>
+        </div>
+
+        <!-- Images bonus -->
+        <div id="bonusImages">
+            <img id="img1" src="media/images/1Pattes.png">
+            <img id="img2" src="media/images/2OailG.png">
+            <img id="img3" src="media/images/3OailD.png">
+            <img id="img4" src="media/images/4Pouce.png">
+            <img id="img5" src="media/images/5Bec.png">
+            <img id="img6" src="media/images/6Pioupiou.png">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+ 
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'923e1639582c53d0',t:'MTc0MjU2Njc5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>

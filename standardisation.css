@@ -1,0 +1,262 @@
+/* Styles pour le bouton score */
+#ButtonScore {
+    position: absolute;
+    top: 5vh;
+    left: 40vw;
+    transform: translate(-50%, -50%);
+    padding: 2vh 3vw;
+    font-size: 4vw;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6vw;
+    cursor: pointer;
+    z-index: 5;
+    min-width: 30vw; /* largeur boite*/
+}
+
+
+
+
+/* Styles pour le produit */
+#product {
+    position: absolute;
+    top: 5vh;
+    left: -40vw; /* Déplacer à % de la largeur de la vue */
+    transform: translateY(-50%); /* Centrer verticalement uniquement */
+    font-size: 5vw;
+    font-family: Arial, sans-serif;
+    color: #3d3c3d;
+    padding: 2vh 2vw;
+    border-radius: 6vw;
+    z-index: 5;
+    min-width: 15vw; /* largeur boite */
+    text-align: center; /* Centrer le texte */
+    display: flex; /* Utiliser flexbox pour centrer verticalement */
+    align-items: center; /* Centrer verticalement */
+    justify-content: center; /* Centrer horizontalement */
+    background-color: transparent; /* Pas de fond par défaut */
+    transition: background-color 0.3s ease; /* Transition pour un effet fluide */
+}
+
+/* Animation de scintillement pour le fond rouge */
+@keyframes scintillementFond {
+    0% { background-color: rgba(255, 0, 0, 0.7); }
+    50% { background-color: rgba(255, 0, 0, 0.3); }
+    100% { background-color: rgba(255, 0, 0, 0.7); }
+}
+
+/* Appliquer l'animation au survol */
+#product:hover, #product:active {
+    background-color: #ff0000; /* Fond rouge au survol ou au toucher */
+    animation: scintillementFond 0.5s ease-in-out infinite; /* Scintillement infini */
+}
+
+
+
+
+
+
+
+/* Animation de scintillement pour le fond rouge */
+@keyframes scintillementFond {
+    0% { background-color: rgba(255, 0, 0, 0.7); }
+    50% { background-color: rgba(255, 0, 0, 0.3); }
+    100% { background-color: rgba(255, 0, 0, 0.7); }
+}
+
+/* Appliquer l'animation au survol */
+#product:hover, #product:active {
+    background-color: #ff0000; /* Fond rouge au survol ou au toucher */
+    animation: scintillementFond 0.5s ease-in-out infinite; /* Scintillement infini */
+}
+/* Animation de scintillement */
+@keyframes scintillement {
+    0% { background-color: rgba(255, 255, 255, 0.7); }
+    50% { background-color: rgba(255, 255, 255, 0.3); }
+    100% { background-color: rgba(255, 255, 255, 0.7); }
+}
+
+/* Classe pour appliquer l'animation */
+.scintillement {
+    animation: scintillement 0.5s ease-in-out 3; /* Répéter 3 fois */
+}
+
+
+
+#product:hover {
+    background-color: #ff0404;
+}
+/* Styles pour le bouton reset et règlement */
+#go2Button {
+    position: absolute;
+    top: 65vh;
+  left: 10vw;
+    transform: translateX(-50%);
+    padding: 1vh 5vh;
+    font-size: 2vw;
+    background-color: rgba(220, 134, 150, 0.7);
+    color: white;
+    border: none;
+    border-radius: 6vw;
+    cursor: pointer;
+    z-index: 5;
+     min-width: 50vw;
+    user-select: none;
+}
+
+#go2Button:hover {
+    background-color: #ff0404;
+}
+
+/* Styles pour texte angle (affichage inutile après mises au point) */
+#angleguide {
+    position: absolute;
+    top: 90vh;
+    left: 4vw;
+    font-size: 4vw;
+    font-family: Arial, sans-serif;
+    color: #ff0000;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 1vh 1vw;
+    border-radius: 6vw;
+    z-index: 5;
+    display: none;
+}
+
+/* Styles pour texte choix */
+#anglechoix {
+    position: absolute;
+    top: 41vh;
+    left: 6vw;
+    font-size: 4vw;
+    font-family: Arial, sans-serif;
+    color: #ff0000;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 2vh 2vw;
+    border-radius: 6vw;
+    z-index: 2;
+}
+
+
+
+/* Styles pour l'encadré randomBox */
+#randomBox {
+    position: absolute;
+    top: 10vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2vw 3vh;
+    border-radius: 5vw;
+    font-size: 5vw;
+    font-family: Arial, sans-serif;
+    z-index: 5;
+}
+
+/* Animation flash */
+@keyframes flash {
+    0% { background-color: #3498db; }
+    40% { background-color: #ff0000; }
+    70% { background-color: #1daf00; }
+    100% { background-color: #3498db; }
+}
+
+/* Styles pour le guide */
+#guide {
+    position: absolute;
+    width: 100vw;
+    height: auto;
+    will-change: transform;
+    z-index: 3;
+    transform-origin: center center;
+}
+
+/* Styles pour la bille */
+#bille {
+    position: absolute;
+    width: 12vw;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    will-change: transform;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 4;
+    transition: transform 0ms;
+}
+
+/* Styles pour le plateau */
+#plateau {
+    position: absolute;
+    width: 100vw;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Styles pour la grille overlay (règlement) */
+#grilleOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 6;
+    pointer-events: none;
+}
+
+/* Styles pour la signature */
+#signature {
+   position: absolute;
+    top: 80vh;
+    left: 5vw;
+    width: 10vw;
+    height: auto; Fgo2
+	top: 50vw;
+	 z-index: 2;
+}
+
+/* Styles pour les images bonus */
+#bonusImages {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 50%; /*dimension taille*/
+    height: 20%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+#bonusImages img {
+    width: 90vw;/*reglage simension*/
+    height: auto;
+    position: absolute;
+    top: 50vw;
+    left: 40vw;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+/* Styles pour le conteneur principal */
+#container {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-image: url('media/images/grille.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    --ball-distance: 45vw;
+}
