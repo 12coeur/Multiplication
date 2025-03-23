@@ -17,26 +17,25 @@
 
 
 
-
-/* Styles pour le produit */
+/* Styles existants pour #product */
 #product {
     position: absolute;
     top: 5vh;
-    left: -40vw; /* Déplacer à % de la largeur de la vue */
-    transform: translateY(-50%); /* Centrer verticalement uniquement */
-    font-size: 5vw;
+    left: -20vw;
+    transform: translate(-50%, -50%);
+    font-size: 6vw;
     font-family: Arial, sans-serif;
     color: #3d3c3d;
     padding: 2vh 2vw;
     border-radius: 6vw;
     z-index: 5;
-    min-width: 15vw; /* largeur boite */
-    text-align: center; /* Centrer le texte */
-    display: flex; /* Utiliser flexbox pour centrer verticalement */
-    align-items: center; /* Centrer verticalement */
-    justify-content: center; /* Centrer horizontalement */
-    background-color: transparent; /* Pas de fond par défaut */
-    transition: background-color 0.3s ease; /* Transition pour un effet fluide */
+    min-width: 15vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
 }
 
 /* Animation de scintillement pour le fond rouge */
@@ -46,37 +45,17 @@
     100% { background-color: rgba(255, 0, 0, 0.7); }
 }
 
-/* Appliquer l'animation au survol */
-#product:hover, #product:active {
-    background-color: #ff0000; /* Fond rouge au survol ou au toucher */
-    animation: scintillementFond 0.5s ease-in-out infinite; /* Scintillement infini */
+/* Survol pour PC */
+#product:hover {
+    background-color: #ff0000;
+    animation: scintillementFond 0.5s ease-in-out infinite;
 }
 
-
-
-
-
-
-
-/* Animation de scintillement pour le fond rouge */
-@keyframes scintillementFond {
-    0% { background-color: rgba(255, 0, 0, 0.7); }
-    50% { background-color: rgba(255, 0, 0, 0.3); }
-    100% { background-color: rgba(255, 0, 0, 0.7); }
+/* Classe pour activer le scintillement au toucher */
+#product.scintillement-active {
+    background-color: #ff0000;
+    animation: scintillementFond 0.5s ease-in-out infinite;
 }
-
-/* Appliquer l'animation au survol */
-#product:hover, #product:active {
-    background-color: #ff0000; /* Fond rouge au survol ou au toucher */
-    animation: scintillementFond 0.5s ease-in-out infinite; /* Scintillement infini */
-}
-/* Animation de scintillement */
-@keyframes scintillement {
-    0% { background-color: rgba(255, 255, 255, 0.7); }
-    50% { background-color: rgba(255, 255, 255, 0.3); }
-    100% { background-color: rgba(255, 255, 255, 0.7); }
-}
-
 /* Classe pour appliquer l'animation */
 .scintillement {
     animation: scintillement 0.5s ease-in-out 3; /* Répéter 3 fois */
