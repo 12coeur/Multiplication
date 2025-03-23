@@ -6,6 +6,11 @@ const ButtonScore = document.getElementById("ButtonScore");
 const product = document.getElementById("product");
 const guide = document.getElementById("guide");
 const angleguide = document.getElementById("angleguide");
+const anglechoix = document.getElementById("anglechoix"); // Ajouté car utilisé dans snapToPlateau
+const randomBox = document.getElementById("randomBox");
+const go2Button = document.getElementById("go2Button");
+const grilleOverlay = document.getElementById("grilleOverlay");
+
 const stepAngle = 360 / 36;
 
 let score = 0;
@@ -19,8 +24,6 @@ let startAngle = 0;
 let accumulatedDelta = 0;
 let angleOffset = 0;
 let isAnimating = false;
-const movementDistance = 40;
-const animationDuration = 1000;
 
 function normalizeAngle(angle) {
     return (angle % 360 + 360) % 360;
@@ -140,6 +143,7 @@ function rotateGuide(x, y) {
         }
     }
 }
+
 function snapToPlateau() {
     isDragging = false;
     const totalPlateauAngle = currentAngle + tourCounter * 360;
@@ -174,18 +178,13 @@ function snapToPlateau() {
         son.play();
     }
 
-    // Appliquer l'effet de scintillement
-    const randomBox = document.getElementById("randomBox");
     randomBox.classList.add("scintillement");
-
-    // Retirer la classe après la fin de l'animation (1.5 secondes)
     setTimeout(() => {
         randomBox.classList.remove("scintillement");
-    }, 1500); // 1500ms = 1.5 secondes (3 répétitions de 0.5 seconde)
+    }, 1500);
 
     generateRandomNumbers();
 }
-
 
 const correspondances = {
     10: 1, 20: 2, 30: 3, 40: 4, 50: 5, 60: 6, 70: 7, 80: 8, 90: 9, 100: 10,
@@ -194,23 +193,9 @@ const correspondances = {
     270: 42, 280: 45, 290: 48, 300: 49, 310: 54, 320: 56, 330: 63, 340: 64,
     350: 72, 0: 81
 };
-// Récupérer l'élément product et le son rate
-const productElement = document.getElementById("product");
-const rateSound = document.getElementById("rate");
-
-// Ajouter un écouteur d'événement pour le survol (mouseenter)
-productElement.addEventListener("mouseenter", () => {
-    rateSound.play(); // Jouer le son rate
-});
-
-// Ajouter un écouteur d'événement pour le toucher (touchstart)
-productElement.addEventListener("touchstart", () => {
-    rateSound.play(); // Jouer le son rate
-});
-
 
 function convertirAngle(angleguide) {
-    return correspondances[angleguide];
+    return correspondances[angleguide] || 0; // Ajout d'une valeur par défaut
 }
 
 function updateBonusImages() {
@@ -224,21 +209,12 @@ function updateBonusImages() {
     ];
 
     images.forEach(img => img.style.display = "none");
-
     for (let i = 0; i < score; i++) {
         if (images[i]) {
             images[i].style.display = "block";
         }
     }
 }
-
-guide.addEventListener("mousedown", (event) => startRotation(event.clientX, event.clientY));
-document.addEventListener("mousemove", (event) => rotateGuide(event.clientX, event.clientY));
-document.addEventListener("mouseup", () => { if (isDragging) snapToPlateau(); });
-
-guide.addEventListener("touchstart", (event) => startRotation(event.touches[0].clientX, event.touches[0].clientY));
-document.addEventListener("touchmove", (event) => rotateGuide(event.touches[0].clientX, event.touches[0].clientY));
-document.addEventListener("touchend", () => { if (isDragging) snapToPlateau(); });
 
 function setGuidePosition() {
     guide.style.position = "absolute";
@@ -252,13 +228,10 @@ function setInitialPosition() {
     const containerHeight = container.clientHeight;
     const billeWidth = bille.clientWidth;
     const billeHeight = bille.clientHeight;
-    let startX = (containerWidth - billeWidth) / 2;
-    let startY = (containerHeight - billeHeight) / 2;
+    const startX = (containerWidth - billeWidth) / 2;
+    const startY = (containerHeight - billeHeight) / 2;
     bille.style.transform = `translate(${startX}px, ${startY}px)`;
 }
-
-setGuidePosition();
-setInitialPosition();
 
 function rotatePlateauStep() {
     currentAngle += stepAngle;
@@ -287,51 +260,77 @@ function generateRandomNumbers() {
     product.textContent = a * b;
 }
 
-generateRandomNumbers();
-
-rotationInterval = setInterval(rotatePlateauStep, 1200);
-
-bille.addEventListener('dragstart', (e) => e.preventDefault());
-bille.addEventListener('drop', (e) => e.preventDefault());
-guide.addEventListener('dragstart', (e) => e.preventDefault());
-
-const go2Button = document.getElementById("go2Button");
-const grilleOverlay = document.getElementById("grilleOverlay");
+function retirerPoint() {
+    if (score > 0) {
+        score -= 1;
+        ButtonScore.textContent = `Score : ${score}`;
+        updateBonusImages();
+        let son = document.getElementById("rate");
+        son.play();
+    }
+}
 
 function handleReset() {
     grilleOverlay.style.display = "block";
     let ding = document.getElementById("ding");
     ding.play();
-
-    // Ajouter un délai avant de masquer l'overlay et recharger la page
     setTimeout(() => {
         grilleOverlay.style.display = "none";
         score = 0;
         ButtonScore.textContent = `Score : ${score}`;
         updateBonusImages();
         location.reload();
-    }, 3000); // Délai de 3000 ms (3 secondes)
+    }, 3000);
 }
 
-go2Button.addEventListener("mousedown", handleReset);
-go2Button.addEventListener("touchstart", handleReset);
+// Événements pour la gestion de la rotation
+guide.addEventListener("mousedown", (event) => startRotation(event.clientX, event.clientY));
+document.addEventListener("mousemove", (event) => rotateGuide(event.clientX, event.clientY));
+document.addEventListener("mouseup", () => { if (isDragging) snapToPlateau(); });
 
-product.addEventListener('mouseenter', () => {
-    retirerPoint();
-});
-
-product.addEventListener('touchstart', () => {
-    retirerPoint();
-});
-
-document.addEventListener('touchstart', function(event) {
+guide.addEventListener("touchstart", (event) => {
     event.preventDefault();
-}, { passive: false });
+    startRotation(event.touches[0].clientX, event.touches[0].clientY);
+});
+document.addEventListener("touchmove", (event) => {
+    event.preventDefault();
+    rotateGuide(event.touches[0].clientX, event.touches[0].clientY);
+});
+document.addEventListener("touchend", () => { if (isDragging) snapToPlateau(); });
 
-function retirerPoint() {
-    if (score > 0) {
-        score -= 1;
-        ButtonScore.textContent = `Score : ${score}`;
-        updateBonusImages();
-    }
-}
+// Gestion du son et du scintillement pour #product
+product.addEventListener("mouseenter", () => {
+    retirerPoint();
+});
+
+product.addEventListener("touchstart", (event) => {
+    event.preventDefault();
+    retirerPoint();
+    product.classList.add("scintillement-active"); // Ajouter la classe pour scintiller
+});
+
+product.addEventListener("touchend", (event) => {
+    event.preventDefault();
+    product.classList.remove("scintillement-active"); // Retirer la classe après le toucher
+});
+
+// Événements de réinitialisation
+go2Button.addEventListener("mousedown", handleReset);
+go2Button.addEventListener("touchstart", (event) => {
+    event.preventDefault();
+    handleReset();
+});
+
+// Prévention du drag par défaut
+bille.addEventListener('dragstart', (e) => e.preventDefault());
+bille.addEventListener('drop', (e) => e.preventDefault());
+guide.addEventListener('dragstart', (e) => e.preventDefault());
+
+// Initialisation
+setGuidePosition();
+setInitialPosition();
+generateRandomNumbers();
+rotationInterval = setInterval(rotatePlateauStep, 1200);
+
+// Suppression de l'écouteur global touchstart qui n'est plus nécessaire
+// document.addEventListener('touchstart', function(event) { event.preventDefault(); }, { passive: false });
